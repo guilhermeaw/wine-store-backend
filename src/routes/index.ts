@@ -3,12 +3,15 @@ import multer from 'multer';
 
 import { uploadConfig } from '../config/upload';
 
+import ensureAuthenticated from '../modules/users/middlewares/ensureAuthenticated';
+
 import UserController from '../modules/users/controllers/UserController';
 import SessionController from '../modules/users/controllers/SessionController';
 import WinesController from '../modules/wines/controllers/WinesController';
 
 export const routes = Router();
 
+routes.use(ensureAuthenticated);
 const upload = multer(uploadConfig.multer);
 
 const sessionController = new SessionController();
