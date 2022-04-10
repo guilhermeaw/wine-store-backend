@@ -21,6 +21,12 @@ export class CreateWines1649207977381 implements MigrationInterface {
           type: 'varchar',
         },
         {
+          name: 'price',
+          type: 'numeric',
+          precision: 12,
+          scale: 2,
+        },
+        {
           name: 'description',
           type: 'text',
         }],

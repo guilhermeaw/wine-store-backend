@@ -15,6 +15,9 @@ export default class Wine {
   @Column()
     img: string;
 
+  @Column()
+    price: number;
+
   @Expose({ name: 'imageUrl' })
   getImage(): string | null {
     if (!this.img) {

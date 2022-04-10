@@ -14,7 +14,7 @@ export default class WinesController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     const {
-      title, description,
+      title, description, price,
     } = request.body;
 
     const imageName = request.file!.filename;
@@ -25,6 +25,7 @@ export default class WinesController {
       title,
       description,
       imageName,
+      price,
     });
 
     return response.json(instanceToPlain(wine));
