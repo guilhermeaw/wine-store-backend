@@ -17,6 +17,11 @@ export class CreateUsers1649454242282 implements MigrationInterface {
           type: 'varchar',
         },
         {
+          name: 'role',
+          type: 'enum',
+          enum: ['user', 'admin'],
+        },
+        {
           name: 'login',
           type: 'varchar',
           isUnique: true,
