@@ -1,5 +1,6 @@
 import { sign } from 'jsonwebtoken';
 
+import AppError from 'shared/errors/AppError';
 import { authConfig } from '../../../config/auth';
 import { AppDataSource } from '../../../database/ormconfig';
 import User from '../entities/User';
@@ -22,7 +23,7 @@ export default class AuthenticateUserUseCase {
     });
 
     if (!user) {
-      throw new Error('Combinação incorreta de usuário e senha.');
+      throw new AppError('Combinação incorreta de usuário e senha.');
     }
 
     const passwordMatched = await new HashProvider().compareHash(
@@ -31,7 +32,7 @@ export default class AuthenticateUserUseCase {
     );
 
     if (!passwordMatched) {
-      throw new Error('Combinação incorreta de usuário e senha.');
+      throw new AppError('Combinação incorreta de usuário e senha.');
     }
 
     const { secret, expiresIn } = authConfig.jwt;

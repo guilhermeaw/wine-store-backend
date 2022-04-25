@@ -1,3 +1,4 @@
+import AppError from 'shared/errors/AppError';
 import { AppDataSource } from '../../../database/ormconfig';
 import User, { UserRole } from '../entities/User';
 import HashProvider from '../providers/HashProvider';
@@ -18,7 +19,7 @@ export default class CreateUserUseCase {
     });
 
     if (checkUserExists) {
-      throw new Error('O login informado já se encontra em uso');
+      throw new AppError('O login informado já se encontra em uso');
     }
 
     const hashedPassword = await new HashProvider().generateHash(password);

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
+import AppError from 'shared/errors/AppError';
 import { authConfig } from '../../../config/auth';
 
 interface ITokenPayload {
@@ -17,7 +18,7 @@ export default function ensureAuthenticated(
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    throw new Error('Token não informado.');
+    throw new AppError('Token não informado.');
   }
 
   const [, token] = authHeader.split(' ');
@@ -32,6 +33,6 @@ export default function ensureAuthenticated(
 
     return next();
   } catch {
-    throw new Error('O token informado é inválido.');
+    throw new AppError('O token informado é inválido.');
   }
 }
